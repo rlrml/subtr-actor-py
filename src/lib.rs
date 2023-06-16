@@ -65,11 +65,46 @@ fn convert_to_py(py: Python, value: &Value) -> PyObject {
     }
 }
 
-pub static DEFAULT_GLOBAL_FEATURE_ADDERS: [&str; 1] = ["BallRigidBody"];
+static DEFAULT_GLOBAL_FEATURE_ADDERS: [&str; 1] = ["BallRigidBody"];
 
-pub static DEFAULT_PLAYER_FEATURE_ADDERS: [&str; 3] =
+static DEFAULT_PLAYER_FEATURE_ADDERS: [&str; 3] =
     ["PlayerRigidBody", "PlayerBoost", "PlayerAnyJump"];
 
+/// Convert a replay file to a `numpy` ndarray with additional metadata in Python.
+///
+/// This function takes a replay file path, reads the file and processes it. It
+/// constructs an ndarray with global and player features and collects metadata
+/// about the replay. The constructed ndarray and metadata are then converted
+/// into Python objects and returned.
+///
+/// The replay file processing can optionally be run at a different
+/// frames-per-second (fps) rate. By default, it processes replays at 10 fps.
+///
+/// # Arguments
+///
+/// * `py`: A Python interpreter instance.
+/// * `filepath`: A path to the replay file.
+/// * `global_feature_adders`: An optional vector of global feature adders. Each
+/// adder is a string that represents a feature to be added to the global
+/// features ndarray.
+/// * `player_feature_adders`: An optional vector of player feature adders. Each
+/// adder is a string that represents a feature to be added to the player
+/// features ndarray.
+/// * `fps`: An optional float representing the frames-per-second to use when
+/// processing the replay. Default is 10.0 fps.
+///
+/// Refer to the [struct definitions provided in the ndarray
+/// collector](https://docs.rs/subtr-actor/latest/subtr_actor/collector/ndarray/index.html)
+/// documentation for valid string names to use within the global_feature_adders
+/// and player_feature_adders arguments. These strings correspond to the
+/// features that will be added to the global and player ndarrays respectively.
+///
+///
+/// # Returns
+///
+/// * A Python tuple containing metadata about the replay and the ndarray of
+/// features. If there was an error reading the file or processing the replay,
+/// this will be an Err variant with the Python error.
 #[pyfunction]
 fn get_ndarray_with_info_from_replay_filepath<'p>(
     py: Python<'p>,
