@@ -466,7 +466,7 @@ dependencies = [
 
 [[package]]
 name = "subtr-actor-py"
-version = "0.1.2"
+version = "0.1.4"
 dependencies = [
  "boxcars",
  "numpy",

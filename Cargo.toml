@@ -1,6 +1,6 @@
 [package]
 name = "subtr-actor-py"
-version = "0.1.2"
+version = "0.1.4"
 authors = ["Ivan Malison <IvanMalison@gmail.com>"]
 edition = "2021"
 
