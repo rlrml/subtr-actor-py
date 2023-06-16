@@ -22,7 +22,7 @@ fn replay_from_data(data: &[u8]) -> PyResult<boxcars::Replay> {
 }
 
 #[pymodule]
-fn boxcars_py(_py: Python, m: &PyModule) -> PyResult<()> {
+fn subtr_actor(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(parse_replay))?;
     m.add_wrapped(wrap_pyfunction!(get_ndarray_with_info_from_replay_filepath))?;
     m.add_wrapped(wrap_pyfunction!(get_replay_meta))?;

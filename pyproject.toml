@@ -6,7 +6,7 @@ authors = ["Ivan Malison <ivanmalison@gmail.com>"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/rlrml/subtr-actor-py"
-packages = [{include = "subtr_actor"}]
+packages = [{include = "subtr_actor", from="subtr_actor"}]
 
 [tool.poetry.dependencies]
 python = "^3.6"
