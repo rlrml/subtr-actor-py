@@ -1,7 +1,7 @@
 use numpy::pyo3::IntoPy;
 use numpy::IntoPyArray;
 use pyo3::prelude::*;
-use pyo3::{exceptions, wrap_pyfunction};
+use pyo3::*;
 use serde_json::Value;
 use std::collections::BTreeMap;
 use std::path::PathBuf;
@@ -22,7 +22,8 @@ fn replay_from_data(data: &[u8]) -> PyResult<boxcars::Replay> {
 }
 
 #[pymodule]
-fn subtr_actor(_py: Python, m: &PyModule) -> PyResult<()> {
+#[pyo3(name = "my_name")]
+fn subtr_actor_module(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_wrapped(wrap_pyfunction!(parse_replay))?;
     m.add_wrapped(wrap_pyfunction!(get_ndarray_with_info_from_replay_filepath))?;
     m.add_wrapped(wrap_pyfunction!(get_replay_meta))?;
