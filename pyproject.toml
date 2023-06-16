@@ -9,11 +9,12 @@ repository = "https://github.com/rlrml/subtr-actor-py"
 packages = [{include = "subtr_actor", from="subtr_actor"}]
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = ">=3.7,<4.0"
 
 [tool.poetry.dev-dependencies]
 wheel = "*"
 maturin = "^0.14.2"
+pytest = "*"
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
