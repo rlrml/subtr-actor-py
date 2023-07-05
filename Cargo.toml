@@ -6,7 +6,7 @@ edition = "2021"
 
 [dependencies]
 boxcars = "0.9.9"
-subtr-actor = "0.1.4"
+subtr-actor = { git = "https://github.com/rlrml/subtr-actor.git", branch = "works_with_spectators" }
 numpy = "0.18.0"
 serde_json = "1.0.52"
 
