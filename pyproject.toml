@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "subtr-actor-py-spec"
-version = "0.0.2"
+version = "0.0.3"
 description = "Python bindings for the Rocket League replay processing library subtr-actor."
 authors = ["Ivan Malison <ivanmalison@gmail.com>"]
 license = "MIT"
@@ -20,5 +20,5 @@ pytest = "*"
 features = ["pyo3/extension-module"]
 
 [build-system]
-requires = ["maturin>=0.14,<0.15"]
+requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
