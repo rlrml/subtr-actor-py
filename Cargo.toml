@@ -1,12 +1,12 @@
 [package]
-name = "subtr-actor-py"
-version = "0.1.4"
+name = "subtr-actor-py-spec"
+version = "0.0.1"
 authors = ["Ivan Malison <IvanMalison@gmail.com>"]
 edition = "2021"
 
 [dependencies]
 boxcars = "0.9.9"
-subtr-actor = "0.1.4"
+subtr-actor-spec = "0.0.2"
 numpy = "0.18.0"
 serde_json = "1.0.52"
 
@@ -15,5 +15,5 @@ version = "0.18.2"
 features = ["extension-module"]
 
 [lib]
-name = "subtr_actor"
+name = "subtr_actor_spec"
 crate-type = ["cdylib"]

@@ -5,7 +5,7 @@ use pyo3::*;
 use serde_json::Value;
 use std::collections::BTreeMap;
 use std::path::PathBuf;
-use subtr_actor::*;
+use subtr_actor_spec::*;
 
 #[pyfunction]
 fn parse_replay<'p>(py: Python<'p>, data: &[u8]) -> PyResult<PyObject> {
@@ -36,7 +36,7 @@ fn to_py_error<E: std::error::Error>(e: E) -> PyErr {
     PyErr::new::<exceptions::PyException, _>(format!("{}", e))
 }
 
-fn handle_frames_exception(e: subtr_actor::SubtrActorError) -> PyErr {
+fn handle_frames_exception(e: subtr_actor_spec::SubtrActorError) -> PyErr {
     PyErr::new::<exceptions::PyException, _>(format!("{:?} {}", e.variant, e.backtrace.to_string()))
 }
 
@@ -139,7 +139,7 @@ fn get_ndarray_with_info_from_replay_filepath<'p>(
 fn build_ndarray_collector(
     global_feature_adders: Option<Vec<String>>,
     player_feature_adders: Option<Vec<String>>,
-) -> subtr_actor::SubtrActorResult<subtr_actor::NDArrayCollector<f32>> {
+) -> subtr_actor_spec::SubtrActorResult<subtr_actor_spec::NDArrayCollector<f32>> {
     let global_feature_adders = global_feature_adders.unwrap_or_else(|| {
         DEFAULT_GLOBAL_FEATURE_ADDERS
             .iter()
@@ -154,7 +154,7 @@ fn build_ndarray_collector(
     });
     let global_feature_adders: Vec<&str> = global_feature_adders.iter().map(|s| &s[..]).collect();
     let player_feature_adders: Vec<&str> = player_feature_adders.iter().map(|s| &s[..]).collect();
-    subtr_actor::NDArrayCollector::<f32>::from_strings(
+    subtr_actor_spec::NDArrayCollector::<f32>::from_strings(
         &global_feature_adders,
         &player_feature_adders,
     )
@@ -203,7 +203,7 @@ fn get_replay_frames_data<'p>(py: Python<'p>, filepath: PathBuf) -> PyResult<PyO
     let data = std::fs::read(filepath.as_path()).map_err(to_py_error)?;
     let replay = replay_from_data(&data)?;
 
-    let replay_data = subtr_actor::ReplayDataCollector::new()
+    let replay_data = subtr_actor_spec::ReplayDataCollector::new()
         .get_replay_data(&replay)
         .map_err(handle_frames_exception)?;
 
